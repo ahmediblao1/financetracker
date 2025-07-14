@@ -21,8 +21,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const validatedData = insertDailySalesSchema.parse(req.body);
       
       // Calculate commissions
-      const trendyolCommission = parseFloat(validatedData.trendyolSales) * 0.15;
-      const yemeksepetiCommission = parseFloat(validatedData.yemeksepetiSales) * 0.18;
+      const trendyolCommission = parseFloat(validatedData.trendyolSales || "0") * 0.15;
+      const yemeksepetiCommission = parseFloat(validatedData.yemeksepetiSales || "0") * 0.18;
 
       const salesData = {
         ...validatedData,
@@ -97,6 +97,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json({ message: "Expense deleted successfully" });
     } catch (error) {
       res.status(500).json({ message: "Failed to delete expense" });
+    }
+  });
+
+  // Daily sales range endpoint
+  app.get("/api/daily-sales-range", async (req, res) => {
+    try {
+      const { startDate, endDate } = req.query;
+      
+      if (!startDate || !endDate) {
+        return res.status(400).json({ message: "Start date and end date are required" });
+      }
+
+      const salesData = await storage.getDailySalesRange(startDate as string, endDate as string);
+      res.json(salesData);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to get daily sales range" });
     }
   });
 

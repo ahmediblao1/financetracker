@@ -44,7 +44,7 @@ export default function SalesReportTable({ data }: SalesReportTableProps) {
       <div className="p-6 border-b border-gray-200">
         <h3 className="text-lg font-semibold text-gray-800 flex items-center">
           <i className="fas fa-chart-bar text-green-600 mr-2"></i>
-          Bugünkü Satış Raporu
+          Today's Sales Report
         </h3>
       </div>
       <div className="p-6">
@@ -53,8 +53,8 @@ export default function SalesReportTable({ data }: SalesReportTableProps) {
             <thead>
               <tr className="bg-blue-100 text-blue-800">
                 <th className="text-left py-2 px-3 font-semibold">Platform</th>
-                <th className="text-right py-2 px-3 font-semibold">Satış</th>
-                <th className="text-right py-2 px-3 font-semibold">Komisyon</th>
+                <th className="text-right py-2 px-3 font-semibold">Sales</th>
+                <th className="text-right py-2 px-3 font-semibold">Commission</th>
                 <th className="text-right py-2 px-3 font-semibold">Net</th>
               </tr>
             </thead>
@@ -72,13 +72,13 @@ export default function SalesReportTable({ data }: SalesReportTableProps) {
                 <td className="py-2 px-3 text-right font-semibold text-green-600">{formatCurrency(yemeksepetiNet)}</td>
               </tr>
               <tr>
-                <td className="py-2 px-3 font-medium">Salon</td>
+                <td className="py-2 px-3 font-medium">In-Store</td>
                 <td className="py-2 px-3 text-right">{formatCurrency(salonSales)}</td>
                 <td className="py-2 px-3 text-right">{formatCurrency(0)}</td>
                 <td className="py-2 px-3 text-right font-semibold text-green-600">{formatCurrency(salonNet)}</td>
               </tr>
               <tr className="bg-yellow-50 font-bold">
-                <td className="py-2 px-3">TOPLAM</td>
+                <td className="py-2 px-3">TOTAL</td>
                 <td className="py-2 px-3 text-right">{formatCurrency(totalSales)}</td>
                 <td className="py-2 px-3 text-right text-red-600">{formatCurrency(totalCommission)}</td>
                 <td className="py-2 px-3 text-right text-lg text-green-600">{formatCurrency(totalNet)}</td>
@@ -90,7 +90,7 @@ export default function SalesReportTable({ data }: SalesReportTableProps) {
         {ikramValue > 0 && (
           <div className="mt-4 p-3 bg-orange-50 border border-orange-200 rounded-lg">
             <div className="flex justify-between items-center">
-              <span className="text-orange-800 font-medium">İkram Ürün Değeri:</span>
+              <span className="text-orange-800 font-medium">Complimentary Items Value:</span>
               <span className="font-bold text-orange-600">{formatCurrency(ikramValue)}</span>
             </div>
           </div>

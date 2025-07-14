@@ -10,10 +10,10 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const expenseFormSchema = z.object({
-  category: z.string().min(1, "Kategori seçin"),
-  amount: z.string().min(1, "Tutar girin"),
-  description: z.string().min(1, "Açıklama girin"),
-  vendor: z.string().min(1, "Tedarikçi/yer bilgisini girin"),
+  category: z.string().min(1, "Please select a category"),
+  amount: z.string().min(1, "Please enter amount"),
+  description: z.string().min(1, "Please enter description"),
+  vendor: z.string().min(1, "Please enter vendor/location"),
 });
 
 type ExpenseFormData = z.infer<typeof expenseFormSchema>;
@@ -23,14 +23,14 @@ interface ExpenseEntryFormProps {
 }
 
 const expenseCategories = [
-  { value: "malzeme", label: "Malzeme/İçecek" },
-  { value: "personel", label: "Personel Maaşı" },
-  { value: "kira", label: "Kira" },
-  { value: "elektrik", label: "Elektrik" },
-  { value: "su", label: "Su" },
-  { value: "gaz", label: "Gaz" },
-  { value: "bakim", label: "Bakım/Onarım" },
-  { value: "diger", label: "Diğer" },
+  { value: "food", label: "Food & Beverages" },
+  { value: "staff", label: "Staff Salary" },
+  { value: "rent", label: "Rent" },
+  { value: "electricity", label: "Electricity" },
+  { value: "water", label: "Water" },
+  { value: "gas", label: "Gas" },
+  { value: "maintenance", label: "Maintenance" },
+  { value: "other", label: "Other" },
 ];
 
 export default function ExpenseEntryForm({ date }: ExpenseEntryFormProps) {
@@ -60,8 +60,8 @@ export default function ExpenseEntryForm({ date }: ExpenseEntryFormProps) {
     },
     onSuccess: () => {
       toast({
-        title: "Başarılı",
-        description: "Gider kaydedildi",
+        title: "Success",
+        description: "Expense added successfully",
       });
       form.reset();
       queryClient.invalidateQueries({ queryKey: ['/api/expenses'] });
@@ -69,8 +69,8 @@ export default function ExpenseEntryForm({ date }: ExpenseEntryFormProps) {
     },
     onError: () => {
       toast({
-        title: "Hata",
-        description: "Gider kaydedilemedi",
+        title: "Error",
+        description: "Failed to add expense",
         variant: "destructive",
       });
     },
@@ -82,14 +82,14 @@ export default function ExpenseEntryForm({ date }: ExpenseEntryFormProps) {
 
   return (
     <div>
-      <h4 className="font-medium text-gray-800 mb-4">Yeni Gider Girişi</h4>
+      <h4 className="font-medium text-gray-800 mb-4">New Expense Entry</h4>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <Label htmlFor="category">Kategori</Label>
+            <Label htmlFor="category">Category</Label>
             <Select onValueChange={(value) => form.setValue("category", value)}>
               <SelectTrigger>
-                <SelectValue placeholder="Kategori Seçin" />
+                <SelectValue placeholder="Select Category" />
               </SelectTrigger>
               <SelectContent>
                 {expenseCategories.map((category) => (
@@ -101,7 +101,7 @@ export default function ExpenseEntryForm({ date }: ExpenseEntryFormProps) {
             </Select>
           </div>
           <div>
-            <Label htmlFor="amount">Tutar</Label>
+            <Label htmlFor="amount">Amount</Label>
             <Input
               id="amount"
               type="number"
@@ -113,19 +113,19 @@ export default function ExpenseEntryForm({ date }: ExpenseEntryFormProps) {
         </div>
         
         <div>
-          <Label htmlFor="description">Açıklama</Label>
+          <Label htmlFor="description">Description</Label>
           <Input
             id="description"
-            placeholder="Gider detayı..."
+            placeholder="Expense details..."
             {...form.register("description")}
           />
         </div>
 
         <div>
-          <Label htmlFor="vendor">Tedarikçi/Yer</Label>
+          <Label htmlFor="vendor">Vendor/Location</Label>
           <Input
             id="vendor"
-            placeholder="Nereden alındı?"
+            placeholder="Where was it purchased?"
             {...form.register("vendor")}
           />
         </div>
@@ -138,12 +138,12 @@ export default function ExpenseEntryForm({ date }: ExpenseEntryFormProps) {
           {expenseMutation.isPending ? (
             <>
               <i className="fas fa-spinner fa-spin mr-2"></i>
-              Ekleniyor...
+              Adding...
             </>
           ) : (
             <>
               <i className="fas fa-plus mr-2"></i>
-              Gider Ekle
+              Add Expense
             </>
           )}
         </Button>

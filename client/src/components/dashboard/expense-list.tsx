@@ -23,16 +23,16 @@ export default function ExpenseList({ date }: ExpenseListProps) {
     },
     onSuccess: () => {
       toast({
-        title: "Başarılı",
-        description: "Gider silindi",
+        title: "Success",
+        description: "Expense deleted successfully",
       });
       queryClient.invalidateQueries({ queryKey: ['/api/expenses'] });
       queryClient.invalidateQueries({ queryKey: ['/api/dashboard-summary'] });
     },
     onError: () => {
       toast({
-        title: "Hata",
-        description: "Gider silinemedi",
+        title: "Error",
+        description: "Failed to delete expense",
         variant: "destructive",
       });
     },
@@ -50,14 +50,23 @@ export default function ExpenseList({ date }: ExpenseListProps) {
 
   const getCategoryLabel = (category: string) => {
     const categoryMap: Record<string, string> = {
-      malzeme: "Malzeme/İçecek",
-      personel: "Personel Maaşı",
-      kira: "Kira",
-      elektrik: "Elektrik",
-      su: "Su",
-      gaz: "Gaz",
-      bakim: "Bakım/Onarım",
-      diger: "Diğer",
+      food: "Food & Beverages",
+      staff: "Staff Salary",
+      rent: "Rent",
+      electricity: "Electricity",
+      water: "Water",
+      gas: "Gas",
+      maintenance: "Maintenance",
+      other: "Other",
+      // Legacy Turkish categories for backward compatibility
+      malzeme: "Food & Beverages",
+      personel: "Staff Salary",
+      kira: "Rent",
+      elektrik: "Electricity",
+      su: "Water",
+      gaz: "Gas",
+      bakim: "Maintenance",
+      diger: "Other",
     };
     return categoryMap[category] || category;
   };
@@ -74,12 +83,12 @@ export default function ExpenseList({ date }: ExpenseListProps) {
 
   return (
     <div>
-      <h4 className="font-medium text-gray-800 mb-4">Bugünkü Giderler</h4>
+      <h4 className="font-medium text-gray-800 mb-4">Today's Expenses</h4>
       <div className="space-y-3 max-h-96 overflow-y-auto">
         {expenses.length === 0 ? (
           <div className="text-center py-8 text-gray-500">
             <i className="fas fa-receipt text-4xl mb-4 opacity-30"></i>
-            <p>Henüz gider eklenmedi</p>
+            <p>No expenses added yet</p>
           </div>
         ) : (
           expenses.map((expense) => (
@@ -110,7 +119,7 @@ export default function ExpenseList({ date }: ExpenseListProps) {
 
       <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
         <div className="flex justify-between items-center">
-          <span className="text-red-800 font-medium">Toplam Günlük Gider:</span>
+          <span className="text-red-800 font-medium">Total Daily Expenses:</span>
           <span className="font-bold text-red-600 text-lg">{formatCurrency(totalExpenses)}</span>
         </div>
       </div>

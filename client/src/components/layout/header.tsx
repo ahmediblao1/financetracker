@@ -28,7 +28,7 @@ export default function Header({ title }: HeaderProps) {
         <div className="flex items-center space-x-4">
           <Button className="bg-primary text-white hover:bg-blue-600">
             <i className="fas fa-plus mr-2"></i>
-            Hızlı Giriş
+            Quick Entry
           </Button>
           <Button 
             variant="outline" 
@@ -36,7 +36,7 @@ export default function Header({ title }: HeaderProps) {
             className="bg-gray-100 text-gray-600 hover:bg-gray-200"
           >
             <i className="fas fa-download mr-2"></i>
-            Excel İndir
+            Export Excel
           </Button>
         </div>
       </div>

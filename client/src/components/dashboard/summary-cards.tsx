@@ -25,11 +25,11 @@ export default function SummaryCards({ data }: SummaryCardsProps) {
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-gray-600 text-sm font-medium">Günlük Satış</p>
+            <p className="text-gray-600 text-sm font-medium">Daily Sales</p>
             <p className="text-2xl font-bold text-gray-900">{formatCurrency(totalSales)}</p>
             <p className="text-green-600 text-sm mt-1">
               <i className="fas fa-arrow-up mr-1"></i>
-              Platform komisyonları düşülmüş
+              After platform commissions
             </p>
           </div>
           <div className="bg-blue-100 p-3 rounded-lg">
@@ -41,11 +41,11 @@ export default function SummaryCards({ data }: SummaryCardsProps) {
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-gray-600 text-sm font-medium">Günlük Gider</p>
+            <p className="text-gray-600 text-sm font-medium">Daily Expenses</p>
             <p className="text-2xl font-bold text-gray-900">{formatCurrency(totalExpenses)}</p>
             <p className="text-gray-600 text-sm mt-1">
               <i className="fas fa-info-circle mr-1"></i>
-              Tüm gider kalemleri
+              All expense categories
             </p>
           </div>
           <div className="bg-red-100 p-3 rounded-lg">
@@ -57,13 +57,13 @@ export default function SummaryCards({ data }: SummaryCardsProps) {
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-gray-600 text-sm font-medium">Net Kar</p>
+            <p className="text-gray-600 text-sm font-medium">Net Profit</p>
             <p className={`text-2xl font-bold ${netProfit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               {formatCurrency(netProfit)}
             </p>
             <p className={`text-sm mt-1 ${netProfit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
               <i className={`fas fa-arrow-${netProfit >= 0 ? 'up' : 'down'} mr-1`}></i>
-              Satış - Gider
+              Sales - Expenses
             </p>
           </div>
           <div className="bg-green-100 p-3 rounded-lg">
@@ -75,13 +75,13 @@ export default function SummaryCards({ data }: SummaryCardsProps) {
       <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-gray-600 text-sm font-medium">Kar Marjı</p>
+            <p className="text-gray-600 text-sm font-medium">Profit Margin</p>
             <p className="text-2xl font-bold text-gray-900">
               {totalSales > 0 ? Math.round((netProfit / totalSales) * 100) : 0}%
             </p>
             <p className="text-orange-600 text-sm mt-1">
               <i className="fas fa-percentage mr-1"></i>
-              Karlılık oranı
+              Profitability ratio
             </p>
           </div>
           <div className="bg-orange-100 p-3 rounded-lg">

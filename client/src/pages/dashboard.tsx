@@ -41,7 +41,7 @@ export default function Dashboard() {
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold text-gray-800 flex items-center">
                   <i className="fas fa-receipt text-red-600 mr-2"></i>
-                  Günlük Gider Girişi
+                  Daily Expense Entry
                 </h3>
               </div>
             </div>

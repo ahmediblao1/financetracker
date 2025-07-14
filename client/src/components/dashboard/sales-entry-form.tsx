@@ -72,15 +72,15 @@ export default function SalesEntryForm({ date }: SalesEntryFormProps) {
     },
     onSuccess: () => {
       toast({
-        title: "Başarılı",
-        description: "Satış verileri kaydedildi",
+        title: "Success",
+        description: "Sales data saved successfully",
       });
       queryClient.invalidateQueries({ queryKey: ['/api/dashboard-summary'] });
     },
     onError: () => {
       toast({
-        title: "Hata",
-        description: "Satış verileri kaydedilemedi",
+        title: "Error",
+        description: "Failed to save sales data",
         variant: "destructive",
       });
     },
@@ -95,14 +95,14 @@ export default function SalesEntryForm({ date }: SalesEntryFormProps) {
       <div className="p-6 border-b border-gray-200">
         <h3 className="text-lg font-semibold text-gray-800 flex items-center">
           <i className="fas fa-edit text-primary mr-2"></i>
-          Günlük Satış Girişi
+          Daily Sales Entry
         </h3>
       </div>
       <div className="p-6">
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="trendyolSales">Trendyol Satış</Label>
+              <Label htmlFor="trendyolSales">Trendyol Sales</Label>
               <Input
                 id="trendyolSales"
                 type="number"
@@ -110,10 +110,10 @@ export default function SalesEntryForm({ date }: SalesEntryFormProps) {
                 placeholder="0"
                 {...form.register("trendyolSales")}
               />
-              <p className="text-xs text-gray-500 mt-1">Komisyon: %15 (otomatik hesaplanacak)</p>
+              <p className="text-xs text-gray-500 mt-1">Commission: 15% (calculated automatically)</p>
             </div>
             <div>
-              <Label htmlFor="yemeksepetiSales">Yemeksepeti Satış</Label>
+              <Label htmlFor="yemeksepetiSales">Yemeksepeti Sales</Label>
               <Input
                 id="yemeksepetiSales"
                 type="number"
@@ -121,12 +121,12 @@ export default function SalesEntryForm({ date }: SalesEntryFormProps) {
                 placeholder="0"
                 {...form.register("yemeksepetiSales")}
               />
-              <p className="text-xs text-gray-500 mt-1">Komisyon: %18 (otomatik hesaplanacak)</p>
+              <p className="text-xs text-gray-500 mt-1">Commission: 18% (calculated automatically)</p>
             </div>
           </div>
           
           <div>
-            <Label htmlFor="salonSales">Salon Satış</Label>
+            <Label htmlFor="salonSales">In-Store Sales</Label>
             <Input
               id="salonSales"
               type="number"
@@ -137,7 +137,7 @@ export default function SalesEntryForm({ date }: SalesEntryFormProps) {
           </div>
 
           <div>
-            <Label htmlFor="ikramValue">İkram Ürün Değeri</Label>
+            <Label htmlFor="ikramValue">Complimentary Items Value</Label>
             <Input
               id="ikramValue"
               type="number"
@@ -150,15 +150,15 @@ export default function SalesEntryForm({ date }: SalesEntryFormProps) {
           <div className="bg-gray-50 p-4 rounded-lg">
             <div className="grid grid-cols-2 gap-4 text-sm">
               <div className="flex justify-between">
-                <span className="text-gray-600">Toplam Satış:</span>
+                <span className="text-gray-600">Total Sales:</span>
                 <span className="font-semibold">{formatCurrency(totalSales)}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Toplam Komisyon:</span>
+                <span className="text-gray-600">Total Commission:</span>
                 <span className="font-semibold text-red-600">{formatCurrency(totalCommission)}</span>
               </div>
               <div className="flex justify-between col-span-2 pt-2 border-t border-gray-200">
-                <span className="text-gray-800 font-medium">Net Satış:</span>
+                <span className="text-gray-800 font-medium">Net Sales:</span>
                 <span className="font-bold text-green-600">{formatCurrency(netSales)}</span>
               </div>
             </div>
@@ -172,12 +172,12 @@ export default function SalesEntryForm({ date }: SalesEntryFormProps) {
             {salesMutation.isPending ? (
               <>
                 <i className="fas fa-spinner fa-spin mr-2"></i>
-                Kaydediliyor...
+                Saving...
               </>
             ) : (
               <>
                 <i className="fas fa-save mr-2"></i>
-                Satış Verilerini Kaydet
+                Save Sales Data
               </>
             )}
           </Button>
