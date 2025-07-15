@@ -10,10 +10,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 const salesFormSchema = z.object({
-  trendyolSales: z.string().min(0),
-  yemeksepetiSales: z.string().min(0),
-  salonSales: z.string().min(0),
-  ikramValue: z.string().min(0),
+  trendyolSales: z.coerce.number().min(0, "Trendyol sales must be a positive number"),
+  yemeksepetiSales: z.coerce.number().min(0, "Yemeksepeti sales must be a positive number"),
+  salonSales: z.coerce.number().min(0, "In-store sales must be a positive number"),
+  ikramValue: z.coerce.number().min(0, "Complimentary items value must be a positive number"),
 });
 
 type SalesFormData = z.infer<typeof salesFormSchema>;
@@ -110,6 +110,9 @@ export default function SalesEntryForm({ date }: SalesEntryFormProps) {
                 placeholder="0"
                 {...form.register("trendyolSales")}
               />
+              {form.formState.errors.trendyolSales && (
+                <p className="text-xs text-red-500 mt-1">{form.formState.errors.trendyolSales.message}</p>
+              )}
               <p className="text-xs text-gray-500 mt-1">Commission: 15% (calculated automatically)</p>
             </div>
             <div>
@@ -121,6 +124,9 @@ export default function SalesEntryForm({ date }: SalesEntryFormProps) {
                 placeholder="0"
                 {...form.register("yemeksepetiSales")}
               />
+              {form.formState.errors.yemeksepetiSales && (
+                <p className="text-xs text-red-500 mt-1">{form.formState.errors.yemeksepetiSales.message}</p>
+              )}
               <p className="text-xs text-gray-500 mt-1">Commission: 18% (calculated automatically)</p>
             </div>
           </div>
@@ -134,6 +140,9 @@ export default function SalesEntryForm({ date }: SalesEntryFormProps) {
               placeholder="0"
               {...form.register("salonSales")}
             />
+            {form.formState.errors.salonSales && (
+              <p className="text-xs text-red-500 mt-1">{form.formState.errors.salonSales.message}</p>
+            )}
           </div>
 
           <div>
@@ -145,6 +154,9 @@ export default function SalesEntryForm({ date }: SalesEntryFormProps) {
               placeholder="0"
               {...form.register("ikramValue")}
             />
+            {form.formState.errors.ikramValue && (
+              <p className="text-xs text-red-500 mt-1">{form.formState.errors.ikramValue.message}</p>
+            )}
           </div>
 
           <div className="bg-gray-50 p-4 rounded-lg">
